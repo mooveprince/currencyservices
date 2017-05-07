@@ -1,12 +1,14 @@
 var express = require('express');
-var log = require ('../utility/logger');
 var rp = require('request-promise');
+
+var log = require ('../utility/logger');
+var transferUtil = require ('../utility/usdinrtransferrate');
 
 var router = express.Router();
 
 /* Exchange Rate API */
 router.get('/exchangerate', function(req, res, next) {
-  log.info ("Request for Test Resource");
+  log.info ("Request for Exchange Rate");
   var conversionBetween = req.query.cb;
 
   if (conversionBetween) {
@@ -28,6 +30,16 @@ router.get('/exchangerate', function(req, res, next) {
       log.info(`Currency Conversion input is required`);
       res.json ({'status': 'failure', 'descripiton': 'Currency Conversion input is required'});
   }
+
+});
+
+router.get ("/transferrate/usdinr", function (req, res, next) {
+  log.info ("Request for transfer Rate between USD to INR");
+
+  var apiResult = transferUtil.usdInrTransferDetails ();    
+  apiResult.then (data => {
+    res.json({'status': 'success', 'exchangeRateList': data})
+  });
 
 });
 
