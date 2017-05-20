@@ -17,6 +17,10 @@ app.get('/favicon.ico', function(req, res) {
     res.sendStatus(204);
 });
 
+app.get('/', function (req, res) {
+    res.send({test: "success"});
+})
+
 app.use ('*', error);
 
 module.exports = app;
