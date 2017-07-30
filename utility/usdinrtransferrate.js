@@ -11,10 +11,10 @@ var usdInrTransferDetails = function () {
     return rp(options)
         .then(function ($) {
             var transferDetails = [];
-            $('.black-line').children().each(function (i, ele) {
-                if (i) {
-                    var exchangeRate = $(this).children().first().next().text().trim();
-                    var agencyName = $(this).find('strong').text();
+            $('#ei_bxr_table').children().each(function (i, ele) {
+                if (ele) {
+                    var exchangeRate = $(this).children().first().next().text().trim().substring(0,5);
+                    var agencyName = $(this).find('p').first().text();
                     transferDetails.push ({exchangeRate: exchangeRate, agencyName: agencyName});
                 }   
             });
