@@ -20,7 +20,9 @@ router.get('/exchangerate', function(req, res, next) {
     rp (options)
         .then (exchangeResult => {
             log.info ("Success response sent for currency exchange")
-            res.json ({'status': 'success', 'exchangeRate': exchangeResult[conversionBetween]});
+            let exchange = exchangeResult[conversionBetween];
+            exchange.val = exchange.val.toFixed(2);
+            res.json ({'status': 'success', 'exchangeRate': exchange});
         })
         .catch (err => {
           log.info(`Error in calling API ${err}`);
