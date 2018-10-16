@@ -14,7 +14,7 @@ var usdInrTransferDetails = function () {
             $('#ei_bxr_table').children().each(function (i, ele) {
                 if (ele) {
                     var exchangeRate = $(this).children().first().next().text().trim().substring(0,5);
-                    var agencyName = $(this).find('p').first().text();
+                    var agencyName = $(this).find('a').last().attr('href').replace("/exchange_rates/","");
                     transferDetails.push ({exchangeRate: exchangeRate, agencyName: agencyName});
                 }   
             });
